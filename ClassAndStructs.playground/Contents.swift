@@ -1,7 +1,6 @@
 import UIKit
 
 // Tipo Referência (reference type)
-
 class JogadorPorReferencia {
     var nome: String
     
@@ -20,6 +19,7 @@ class JogoPorReferencia {
 }
 
 do {
+    print(" *** Reference Type *** \n")
     let jogo = JogoPorReferencia()
     
     let jogador = JogadorPorReferencia(nome: "Rayana")
@@ -53,4 +53,37 @@ do {
     
     print(jogo.mostrarJogadores())
     // Imprime o jogador Camila e o jogador Maria pois foi feita uma nova instanciacao e nao uma copia de outro objeto
+}
+
+// O struct e o enum são do tipo Value Types, ou seja, eles criam uma cópia da informacao
+// entao eles nao fazem um apontamento para aquela informacao e sim, criam um novo espaco de memória
+
+// Tipo Valor (Value Types)
+struct JogadorPorValor {
+    var nome: String
+}
+
+struct JogoPorValor {
+    var jogador1: JogadorPorValor? = nil
+    var jogador2: JogadorPorValor? = nil
+    
+    func mostrarJogadores() -> String {
+        return "Jogador 1: \(jogador1?.nome ?? "Ninguém") \nJogador 2: \(jogador2?.nome ?? "Ninguém")"
+
+    }
+}
+
+do {
+    print("\n\n *** Value Types *** \n")
+    
+    var jogo = JogoPorValor()
+    
+    let jogador = JogadorPorValor(nome: "Rayana")
+    jogo.jogador1 = jogador
+    
+    var segundoJogador = jogador
+    segundoJogador.nome = "Marisa"
+    jogo.jogador2 = segundoJogador
+    
+    print(jogo.mostrarJogadores())
 }
